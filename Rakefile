@@ -45,5 +45,8 @@ end
 
 desc "Force puppet run"
 task :force do
-  sh "puppet apply -t -e \"notify { 'puppet' : message => 'puppet' } \" "
+  sh "puppet apply -t -e \"notify { 'puppet' : message => 'puppet' } \" " do
+  |ok, status|
+    puts "ok #{ok} status #{status.exitstatus}\n"
+  end
 end
