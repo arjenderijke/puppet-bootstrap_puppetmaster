@@ -35,7 +35,6 @@
 #
 # Copyright 2015 Your name here, unless otherwise noted.
 #
-class provision_puppetmaster {
-
-
+class bootstrap_puppetmaster {
+  include bootstrap_puppetmaster::puppetmaster
 }

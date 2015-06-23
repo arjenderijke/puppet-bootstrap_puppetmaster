@@ -25,7 +25,7 @@ task :pre do
    'rubygem-rake',
    'puppet'
   ].each do |rpm_package|
-    sh "dnf install #{rpm_package}"
+    sh "dnf -y install #{rpm_package}"
   end
   ['puppetlabs_spec_helper',
    'puppet-lint'
@@ -61,9 +61,41 @@ task :force do
   end
 end
 
+desc "puppet generate cert"
+task :step0 do
+  sh "puppet cert generate localhost.localdomain" do
+  |ok, status|
+    puts "ok #{ok} status #{status.exitstatus}\n"
+  end
+end
+
 desc "First puppet run"
 task :step1 do
-  sh "puppet apply --modulepath /usr/share/puppet/modules -t -v #{Dir.pwd}/manifests/init.pp" do
+  sh "puppet apply --modulepath /usr/share/puppet/modules:#{Dir.pwd} -t -v #{Dir.pwd}/manifests/stemp1.pp" do
+  |ok, status|
+    puts "ok #{ok} status #{status.exitstatus}\n"
+  end
+end
+
+desc "build package"
+task :build_pkg do
+  sh "puppet module build #{Dir.pwd}" do
+  |ok, status|
+    puts "ok #{ok} status #{status.exitstatus}\n"
+  end
+end
+
+desc "install package"
+task :install_pkg do
+  sh "puppet module install -f #{Dir.pwd}/pkg/arjenderijke-bootstrap_puppetmaster-0.1.0.tar.gz " do
+  |ok, status|
+    puts "ok #{ok} status #{status.exitstatus}\n"
+  end
+end
+
+desc "Second puppet run"
+task :step2 do
+  sh "puppet apply --modulepath /usr/share/puppet/modules:/etc/puppet/modules -t -v -e \"include bootstrap_puppetmaster\" " do
   |ok, status|
     puts "ok #{ok} status #{status.exitstatus}\n"
   end
