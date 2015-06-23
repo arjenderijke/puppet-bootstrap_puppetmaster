@@ -21,7 +21,17 @@ task :default => [:pre, :modules, :force]
 
 desc "Validate prerequisits"
 task :pre do
-  sh "yum list installed puppet"
+  ['ruby',
+   'rubygem-rake',
+   'puppet'
+  ].each do |rpm_package|
+    sh "dnf install #{rpm_package}"
+  end
+  ['puppetlabs_spec_helper',
+   'puppet-lint'
+  ].each do |ruby_gem|
+    sh "gem install #{ruby_gem}"
+  end
 end
 
 desc "install puppet modules"
@@ -46,6 +56,14 @@ end
 desc "Force puppet run"
 task :force do
   sh "puppet apply -t -e \"notify { 'puppet' : message => 'puppet' } \" " do
+  |ok, status|
+    puts "ok #{ok} status #{status.exitstatus}\n"
+  end
+end
+
+desc "First puppet run"
+task :step1 do
+  sh "puppet apply --modulepath /usr/share/puppet/modules -t -v #{Dir.pwd}/manifests/init.pp" do
   |ok, status|
     puts "ok #{ok} status #{status.exitstatus}\n"
   end
