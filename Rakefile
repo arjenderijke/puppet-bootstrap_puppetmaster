@@ -18,6 +18,7 @@ task :validate do
 end
 
 task :default => [:pre, :modules, :force]
+task :step => [:build_pkg, :install_pkg, :step2]
 
 desc "Validate prerequisits"
 task :pre do
@@ -25,7 +26,7 @@ task :pre do
    'rubygem-rake',
    'puppet'
   ].each do |rpm_package|
-    sh "dnf -y install #{rpm_package}"
+    sh "yum -y install #{rpm_package}"
   end
   ['puppetlabs_spec_helper',
    'puppet-lint'

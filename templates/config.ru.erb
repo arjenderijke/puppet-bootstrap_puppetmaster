@@ -1,0 +1,12 @@
+# This file is created by copying the relevant lines from:
+#  /usr/share/puppet/ext/rack/config.ru
+
+$0 = "master"
+
+ARGV << "--rack"
+ARGV << "--confdir" << "/etc/puppet"
+ARGV << "--vardir"  << "/var/lib/puppet"
+
+require 'puppet/util/command_line'
+
+run Puppet::Util::CommandLine.new.execute
