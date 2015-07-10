@@ -20,6 +20,17 @@ class bootstrap_puppetmaster::puppetmaster (
 
   class { 'apache::mod::passenger': }
 
+  $allowed_hosts = ['127.0.0.1', '192.168.121.0/24']
+
+  class { 'apache::mod::proxy' :
+    proxy_requests => 'On',
+    allow_from     => $allowed_hosts,
+  }
+
+  package {'puppet':
+    ensure  => installed,
+  }
+
   package {'puppet-server':
     ensure  => installed,
     require => File['puppetconf'],
@@ -53,6 +64,15 @@ class bootstrap_puppetmaster::puppetmaster (
     ensure   => installed,
     provider => 'gem',
   }
+
+  file { '/var/lib/puppet/reports':
+    ensure  => 'directory',
+    owner   => puppet,
+    group   => puppet,
+    mode    => '0755',
+    require => Package['puppet'],
+  }
+
   file { '/usr/share/puppet/rack':
     ensure  => 'directory',
     owner   => root,

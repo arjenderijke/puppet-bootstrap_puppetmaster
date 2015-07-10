@@ -14,16 +14,16 @@
     certname = <%= @puppet_server %>
     server = <%= @puppet_server %>
     ca_server = <%= @puppet_server %>
-    #environment = <%= @hiera_environment %>
+    environment = <%= @hiera_environment %>
 
     max_deprecations = 0
     disable_warnings = deprecations
     pluginsync = true
 
 [master]
-    #environment = <%= @hiera_environment %>
+    environment = <%= @hiera_environment %>
     #environment = production
-    #masterlog = $logdir/puppetmaster.log
+    masterlog = $logdir/puppetmaster.log
     #hiera_config = /export/scratch1/cie/$environment/src/puppet/hiera.yaml
 
     #manifestdir = $confdir/$environment
@@ -51,6 +51,6 @@
     # puppetforge are not found. For example the concat module is needed
     # by the http module.
     modulepath = /usr/share/puppet/modules
-    #environment = <%= @hiera_environment %>
+    environment = <%= @hiera_environment %>
 
     max_deprecations = 0
