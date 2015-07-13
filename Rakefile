@@ -64,7 +64,7 @@ end
 
 desc "puppet generate cert"
 task :step0 do
-  sh "puppet cert generate localhost.localdomain" do
+  sh "puppet cert generate localhost.localdomain --dns_alt_names=localhost" do
   |ok, status|
     puts "ok #{ok} status #{status.exitstatus}\n"
   end
@@ -97,6 +97,15 @@ end
 desc "Second puppet run"
 task :step2 do
   sh "puppet apply --modulepath /usr/share/puppet/modules:/etc/puppet/modules -t -v -e \"include bootstrap_puppetmaster\" " do
+  |ok, status|
+    puts "ok #{ok} status #{status.exitstatus}\n"
+  end
+end
+
+desc "Install PuppetDB"
+task :step3 do
+  #sh "puppet apply --modulepath /usr/share/puppet/modules:#{Dir.pwd} -t -v #{Dir.pwd}/manifests/puppetdb.pp" do
+  sh "puppet apply --modulepath /usr/share/puppet/modules:/etc/puppet/modules -t -v -e \"include ::bootstrap_puppetmaster::puppetdb\" " do
   |ok, status|
     puts "ok #{ok} status #{status.exitstatus}\n"
   end

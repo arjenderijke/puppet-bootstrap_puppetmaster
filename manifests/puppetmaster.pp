@@ -69,7 +69,7 @@ class bootstrap_puppetmaster::puppetmaster (
     ensure  => 'directory',
     owner   => puppet,
     group   => puppet,
-    mode    => '0755',
+    mode    => '0750',
     require => Package['puppet'],
   }
 
