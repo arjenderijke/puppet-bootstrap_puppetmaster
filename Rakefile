@@ -17,14 +17,15 @@ task :validate do
   end
 end
 
-task :default => [:pre, :modules, :force]
-task :step => [:build_pkg, :install_pkg, :step2]
+task :default => [:pre, :modules, :force, :step0]
+task :step => [:build_pkg, :install_pkg, :step1, :step2]
 
 desc "Validate prerequisits"
 task :pre do
   ['ruby',
    'rubygem-rake',
-   'puppet'
+   'puppet',
+   'java-1.8.0-openjdk'
   ].each do |rpm_package|
     sh "yum -y install #{rpm_package}"
   end
@@ -70,9 +71,9 @@ task :step0 do
   end
 end
 
-desc "First puppet run"
+desc "Add puppetlabs repositories"
 task :step1 do
-  sh "puppet apply --modulepath /usr/share/puppet/modules:#{Dir.pwd} -t -v #{Dir.pwd}/manifests/stemp1.pp" do
+  sh "puppet apply --modulepath /usr/share/puppet/modules:/etc/puppet/modules -t -v -e \"include ::bootstrap_puppetmaster::yum\" " do
   |ok, status|
     puts "ok #{ok} status #{status.exitstatus}\n"
   end
@@ -104,9 +105,15 @@ end
 
 desc "Install PuppetDB"
 task :step3 do
-  #sh "puppet apply --modulepath /usr/share/puppet/modules:#{Dir.pwd} -t -v #{Dir.pwd}/manifests/puppetdb.pp" do
   sh "puppet apply --modulepath /usr/share/puppet/modules:/etc/puppet/modules -t -v -e \"include ::bootstrap_puppetmaster::puppetdb\" " do
   |ok, status|
     puts "ok #{ok} status #{status.exitstatus}\n"
   end
+end
+
+desc "Workarounds for puppetdb"
+task :workaround do
+  sh "/usr/bin/wget http://yum.puppetlabs.com/fedora/f20/products/x86_64/puppetdb-2.3.5-1.fc20.noarch.rpm -O /tmp/puppetdb-2.3.5-1.fc20.noarch.rpm"
+  sh "/usr/bin/rpm -i --nodeps /tmp/puppetdb-2.3.5-1.fc20.noarch.rpm"
+  sh "/usr/bin/cp #{Dir.pwd}/files/puppetdb.service /usr/lib/systemd/system/puppetdb.service"
 end

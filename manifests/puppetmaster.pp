@@ -73,6 +73,14 @@ class bootstrap_puppetmaster::puppetmaster (
     require => Package['puppet'],
   }
 
+  file { "/var/lib/puppet/reports/${::fqdn}":
+    ensure  => 'directory',
+    owner   => puppet,
+    group   => puppet,
+    mode    => '0750',
+    require => File['/var/lib/puppet/reports'],
+  }
+
   file { '/usr/share/puppet/rack':
     ensure  => 'directory',
     owner   => root,

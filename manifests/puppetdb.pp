@@ -7,34 +7,6 @@ class bootstrap_puppetmaster::puppetdb (
   $manage_dbserver = !is_string($postgresql_datadir)
   $install_server = 'ciemaster.itf.cwi.nl'
   
-  yumrepo { 'puppetlabs-products':
-    descr    => "Puppet Labs Products Fedora ${::operatingsystemrelease} - ${::architecture}",
-    baseurl  => "http://yum.puppetlabs.com/fedora/f${::operatingsystemrelease}/products/\$basearch",
-    #baseurl  => "http://yum.puppetlabs.com/fedora/f20/products/\$basearch",
-    enabled  => 1,
-    gpgcheck => 0,
-    priority => 99,
-  }
-
-  yumrepo { 'puppetlabs-deps':
-    descr    => "Puppet Labs Dependencies Fedora ${::operatingsystemrelease} - \$basearch",
-    baseurl  => "http://yum.puppetlabs.com/fedora/f${::operatingsystemrelease}/dependencies/\$basearch",
-    #gpgkey   => "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-puppetlabs"
-    enabled  => 1,
-    gpgcheck => 0,
-    priority => 99,
-  }
-
-  yumrepo { 'puppetlabs-devel':
-    descr    => "Puppet Labs Devel Fedora ${::operatingsystemrelease} - \$basearch",
-    #baseurl  => "http://yum.puppetlabs.com/fedora/f${::operatingsystemrelease}/devel/\$basearch",
-    baseurl  => "http://yum.puppetlabs.com/fedora/f20/devel/\$basearch",
-    #gpgkey   => "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-puppetlabs"
-    enabled  => 1,
-    gpgcheck => 0,
-    priority => 99,
-  }
-
   if ($manage_dbserver == false) {
     class { '::postgresql::globals':
       version => '9.3',
@@ -52,10 +24,18 @@ class bootstrap_puppetmaster::puppetdb (
     listen_address   => $::fqdn,
     manage_dbserver  => $manage_dbserver,
     confdir          => '/etc/puppetdb/conf.d',
-    require          => Yumrepo ['puppetlabs-products'],
+    #require          => Yumrepo ['puppetlabs-products'],
   }
 
+  #class { '::puppetdb::globals':
+  #  version => '2.3.5-1.fc20',
+  #}
+
+  #$::puppetdb::globals::version = '2.3.5-1.fc20'
+
   class { '::puppetdb::master::config':
-    terminus_package => 'puppetdb-terminus',
+    puppet_service_name => 'httpd',
+    terminus_package    => 'puppetdb-terminus',
+    test_url            => '/v3/version',
   }
 }
