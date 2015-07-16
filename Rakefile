@@ -17,8 +17,8 @@ task :validate do
   end
 end
 
-task :default => [:pre, :modules, :force, :step0]
-task :step => [:build_pkg, :install_pkg, :step1, :step2]
+task :default => [:puppetmaster]
+task :puppetmaster => [:pre, :modules, :force, :step0, :build_pkg, :install_pkg, :step1, :step2, :puppetrun, :workaround, :step3]
 
 desc "Validate prerequisits"
 task :pre do
@@ -116,4 +116,12 @@ task :workaround do
   sh "/usr/bin/wget http://yum.puppetlabs.com/fedora/f20/products/x86_64/puppetdb-2.3.5-1.fc20.noarch.rpm -O /tmp/puppetdb-2.3.5-1.fc20.noarch.rpm"
   sh "/usr/bin/rpm -i --nodeps /tmp/puppetdb-2.3.5-1.fc20.noarch.rpm"
   sh "/usr/bin/cp #{Dir.pwd}/files/puppetdb.service /usr/lib/systemd/system/puppetdb.service"
+end
+
+desc "run puppet agent"
+task :puppetrun do
+  sh "puppet agent" do
+  |ok, status|
+    puts "ok #{ok} status #{status.exitstatus}\n"
+  end
 end
