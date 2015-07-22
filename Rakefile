@@ -18,7 +18,7 @@ task :validate do
 end
 
 task :default => [:puppetmaster]
-task :puppetmaster => [:pre, :modules, :force, :step0, :build_pkg, :install_pkg, :step1, :step2, :puppetrun, :workaround, :step3]
+task :puppetmaster => [:pre, :modules, :force, :step0, :build_pkg, :install_pkg, :step1, :step2, :puppetrun, :workaround, :eyaml, :step3]
 
 desc "Validate prerequisits"
 task :pre do
@@ -30,7 +30,8 @@ task :pre do
     sh "yum -y install #{rpm_package}"
   end
   ['puppetlabs_spec_helper',
-   'puppet-lint'
+   'puppet-lint',
+   'hiera-eyaml'
   ].each do |ruby_gem|
     sh "gem install #{ruby_gem}"
   end
@@ -103,6 +104,18 @@ task :step2 do
   end
 end
 
+desc "Setup eyaml"
+task :eyaml do
+  sh "/usr/bin/mkdir /etc/puppet/hiera"
+  sh "/usr/bin/cp #{Dir.pwd}/files/private_key.pkcs7.pem /etc/puppet/keys/"
+  sh "/usr/bin/cp #{Dir.pwd}/files/public_key.pkcs7.pem /etc/puppet/keys/"
+  sh "/usr/bin/cp #{Dir.pwd}/files/common.json /etc/puppet/hiera/"
+  sh "/usr/bin/cp #{Dir.pwd}/files/hiera.yaml /etc/puppet/"
+  sh "/usr/bin/cp #{Dir.pwd}/files/secure.eyaml /etc/puppet/hiera/"
+  sh "/usr/bin/cp #{Dir.pwd}/files/site.pp /etc/puppet/manifests/"
+  sh "/usr/bin/systemctl restart httpd.service"
+end
+
 desc "Install PuppetDB"
 task :step3 do
   sh "puppet apply --modulepath /usr/share/puppet/modules:/etc/puppet/modules -t -v -e \"include ::bootstrap_puppetmaster::puppetdb\" " do
@@ -120,7 +133,7 @@ end
 
 desc "run puppet agent"
 task :puppetrun do
-  sh "puppet agent" do
+  sh "puppet agent -t" do
   |ok, status|
     puts "ok #{ok} status #{status.exitstatus}\n"
   end

@@ -22,13 +22,11 @@
 
 [master]
     environment = <%= @hiera_environment %>
-    #environment = production
     masterlog = $logdir/puppetmaster.log
-    #hiera_config = /export/scratch1/cie/$environment/src/puppet/hiera.yaml
+    hiera_config = /etc/puppet/hiera.yaml
 
     #manifestdir = $confdir/$environment
-    #modulepath = /export/scratch1/cie/$environment/src/puppet/modules:/usr/share/puppet/modules
-    modulepath = /usr/share/puppet/modules
+    modulepath = /usr/share/puppet/modules:/etc/puppet/modules
     #storeconfigs = true
     #storeconfigs_backend = puppetdb
     #max_deprecations = 0

@@ -3,6 +3,7 @@
 #
 class bootstrap_puppetmaster::puppetdb (
   $postgresql_datadir = undef,
+  $postgresql_password = undef,
 ) {
   $manage_dbserver = !is_string($postgresql_datadir)
   $install_server = 'ciemaster.itf.cwi.nl'
@@ -17,6 +18,7 @@ class bootstrap_puppetmaster::puppetdb (
       #listen_addresses        => $listen_addresses,
       listen_addresses        => $::fqdn,
       datadir                 => $postgresql_datadir,
+      postgres_password       => $postgresql_password,
     }
   }
 
