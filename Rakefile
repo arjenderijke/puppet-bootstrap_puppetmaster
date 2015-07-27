@@ -66,7 +66,7 @@ end
 
 desc "puppet generate cert"
 task :step0 do
-  sh "puppet cert generate localhost.localdomain --dns_alt_names=localhost" do
+  sh "puppet cert generate #{ENV['HOSTNAME']} --dns_alt_names=#{ENV['HOSTNAME'].split('.').first}" do
   |ok, status|
     puts "ok #{ok} status #{status.exitstatus}\n"
   end
