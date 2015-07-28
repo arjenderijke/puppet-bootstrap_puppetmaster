@@ -4,8 +4,8 @@
 
 class bootstrap_puppetmaster::puppetmaster (
   $hiera_environment = 'production',
-  #$puppet_server = $::fqdn,
-  $puppet_server = 'localhost.localdomain',
+  $puppet_server = $::fqdn,
+  #$puppet_server = 'localhost.localdomain',
   $ssl_dir = '/var/lib/puppet/ssl',
 ) {
   class {'apache':
