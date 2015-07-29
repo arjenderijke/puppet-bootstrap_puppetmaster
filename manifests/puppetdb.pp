@@ -15,15 +15,12 @@ class bootstrap_puppetmaster::puppetdb (
 
     class { '::postgresql::server':
       ip_mask_allow_all_users => '0.0.0.0/0',
-      #listen_addresses        => $listen_addresses,
-      listen_addresses        => $::fqdn,
       datadir                 => $postgresql_datadir,
       postgres_password       => $postgresql_password,
     }
   }
 
   class { '::puppetdb':
-    listen_address   => $::fqdn,
     manage_dbserver  => $manage_dbserver,
     confdir          => '/etc/puppetdb/conf.d',
     #require          => Yumrepo ['puppetlabs-products'],

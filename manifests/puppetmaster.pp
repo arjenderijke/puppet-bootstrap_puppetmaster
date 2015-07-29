@@ -4,10 +4,15 @@
 
 class bootstrap_puppetmaster::puppetmaster (
   $hiera_environment = 'production',
-  $puppet_server = $::fqdn,
-  #$puppet_server = 'localhost.localdomain',
+  $puppet_server_hostname = $::fqdn,
   $ssl_dir = '/var/lib/puppet/ssl',
 ) {
+  if ($puppet_server_hostname == 'localhost') {
+    $puppet_server = 'localhost.localdomain'
+  } else {
+    $puppet_server = $puppet_server_hostname
+  }
+
   class {'apache':
     default_mods => [ 'actions', 'auth_digest', 'authn_anon', 'access_compat',
                       'authn_dbm', 'authz_dbm', 'authz_owner', 'authz_user',
