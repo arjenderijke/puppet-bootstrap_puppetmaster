@@ -1,27 +1,17 @@
 #
 # class bootstrap_puppetmaster::puppetdb
 #
-class bootstrap_puppetmaster::puppetdb (
-  $postgresql_datadir = undef,
-  $postgresql_password = undef,
-) {
-  $manage_dbserver = !is_string($postgresql_datadir)
-  $install_server = 'ciemaster.itf.cwi.nl'
-  
-  if ($manage_dbserver == false) {
-    class { '::postgresql::globals':
-      version => '9.3',
-    }
+class bootstrap_puppetmaster::puppetdb {
+  class { '::postgresql::globals':
+    version => '9.3',
+  }
 
-    class { '::postgresql::server':
-      ip_mask_allow_all_users => '0.0.0.0/0',
-      datadir                 => $postgresql_datadir,
-      postgres_password       => $postgresql_password,
-    }
+  class { '::postgresql::server':
+    ip_mask_allow_all_users => '0.0.0.0/0',
   }
 
   class { '::puppetdb':
-    manage_dbserver  => $manage_dbserver,
+    manage_dbserver  => false,
     confdir          => '/etc/puppetdb/conf.d',
     #require          => Yumrepo ['puppetlabs-products'],
   }

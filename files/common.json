@@ -1,4 +1,3 @@
 { 
-    "use_ipv4" : true,
-    "bootstrap_puppetmaster::puppetdb::postgresql_datadir" : "/var/lib/pgsql/database"
+    "postgresql::server::datadir" : "/var/lib/pgsql/database"
 }
