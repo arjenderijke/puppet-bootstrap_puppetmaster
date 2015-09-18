@@ -19,6 +19,7 @@ end
 
 task :default => [:puppetmaster]
 task :puppetmaster => [:pre, :modules, :force, :step0, :build_pkg, :install_pkg, :step1, :step2, :puppetrun, :workaround, :eyaml, :step3]
+task :upgrade => [:pre, :modules, :force, :build_pkg, :install_pkg, :step1, :step2, :puppetrun, :workaround, :eyaml, :step3]
 
 desc "Validate prerequisits"
 task :pre do
