@@ -17,7 +17,9 @@ task :validate do
   end
 end
 
-task :default => [:puppetmaster]
+#task :default => [:puppetmaster]
+task :default => [:spec, :lint]
+
 task :puppetmaster => [:pre, :modules, :force, :step0, :build_pkg, :install_pkg, :step1, :step2, :puppetrun, :workaround, :eyaml, :step3]
 task :upgrade => [:pre, :modules, :force, :build_pkg, :install_pkg, :step1, :step2, :puppetrun, :workaround, :eyaml, :step3]
 
