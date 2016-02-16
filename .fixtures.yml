@@ -2,5 +2,6 @@ fixtures:
   repositories:
     stdlib: "git://github.com/puppetlabs/puppetlabs-stdlib.git"
     apache: "git://github.com/puppetlabs/puppetlabs-apache.git"
+    concat: "git://github.com/puppetlabs/puppetlabs-concat.git"
   symlinks:
     bootstrap_puppetmaster: "#{source_dir}"
