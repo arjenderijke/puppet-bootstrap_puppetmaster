@@ -1,0 +1,6 @@
+fixtures:
+  repositories:
+    stdlib: "git://github.com/puppetlabs/puppetlabs-stdlib.git"
+    apache: "git://github.com/puppetlabs/puppetlabs-apache.git"
+  symlinks:
+    bootstrap_puppetmaster: "#{source_dir}"
