@@ -1,7 +1,7 @@
 require 'spec_helper'
-describe 'provision_puppetmaster' do
+describe 'bootstrap_puppetmaster' do
 
   context 'with defaults for all parameters' do
-    it { should contain_class('provision_puppetmaster') }
+    it { should contain_class('bootstrap_puppetmaster') }
   end
 end
