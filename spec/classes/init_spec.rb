@@ -9,7 +9,8 @@ describe 'bootstrap_puppetmaster' do
         :operatingsystem        => 'Ubuntu',
         :operatingsystemrelease => '12.04'
       }
-      
+    end
+
     it { should contain_class('bootstrap_puppetmaster') }
   end
 end
