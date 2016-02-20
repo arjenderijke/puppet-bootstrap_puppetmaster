@@ -1,5 +1,7 @@
 # bootstrap_puppetmaster
 
+[![Build Status](https://travis-ci.org/arjenderijke/puppet-bootstrap_puppetmaster.svg?branch=master)](https://travis-ci.org/arjenderijke/puppet-bootstrap_puppetmaster)
+
 #### Table of Contents
 
 1. [Overview](#overview)
