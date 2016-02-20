@@ -12,6 +12,6 @@ describe 'bootstrap_puppetmaster' do
     end
 
     #t { should contain_class('bootstrap_puppetmaster') }
-    it { should_not compile.and_raise_error(Puppet::Error, /Could not find resource 'Class[Apache::Mod::Prefork]' for relationship on 'Class[Apache::Mod::Cgi]'/) }
+    it { should_not compile.and_raise_error(/Could not find resource 'Class[Apache::Mod::Prefork]' for relationship on 'Class[Apache::Mod::Cgi]'/) }
   end
 end
