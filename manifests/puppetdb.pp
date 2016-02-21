@@ -11,8 +11,8 @@ class bootstrap_puppetmaster::puppetdb {
   }
 
   class { '::puppetdb':
-    manage_dbserver  => false,
-    confdir          => '/etc/puppetdb/conf.d',
+    manage_dbserver => false,
+    confdir         => '/etc/puppetdb/conf.d',
     #require          => Yumrepo ['puppetlabs-products'],
   }
 

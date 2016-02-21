@@ -57,8 +57,8 @@ class bootstrap_puppetmaster::puppetmaster (
   }
 
   file { 'eyaml_keys_dir':
-    ensure  => 'directory',
-    path    => '/etc/puppet/keys',
+    ensure => 'directory',
+    path   => '/etc/puppet/keys',
   }
 
   package {'hiera':
