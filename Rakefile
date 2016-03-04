@@ -27,14 +27,16 @@ desc "Validate prerequisits"
 task :pre do
   ['ruby',
    'rubygem-rake',
-   'puppet-3.7.5',
-   'java-1.8.0-openjdk'
+   'puppet-3.8.1',
+   'java-1.8.0-openjdk',
+   'wget'
   ].each do |rpm_package|
     sh "dnf -y install #{rpm_package}"
   end
   ['puppetlabs_spec_helper',
    'puppet-lint',
-   'hiera-eyaml'
+   'hiera-eyaml',
+   'safe_yaml'
   ].each do |ruby_gem|
     sh "gem install #{ruby_gem}"
   end
