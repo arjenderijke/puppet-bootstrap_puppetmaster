@@ -2,9 +2,9 @@
 # class bootstrap_puppetmaster::puppetdb
 #
 class bootstrap_puppetmaster::puppetdb {
-  class { '::postgresql::globals':
-    version => '9.3',
-  }
+#  class { '::postgresql::globals':
+#    version => '9.4',
+#  }
 
   class { '::postgresql::server':
     ip_mask_allow_all_users => '0.0.0.0/0',

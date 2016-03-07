@@ -9,7 +9,11 @@
 
     # Where SSL certificates are kept.
     # The default value is '$confdir/ssl'.
+    <% if @osversion == '22' %>
+    ssldir = /var/lib/puppet/ssl
+    <% else %>
     ssldir = $vardir/ssl
+    <% end %>
 
     certname = <%= @puppet_server %>
     server = <%= @puppet_server %>
@@ -26,7 +30,11 @@
     hiera_config = /etc/puppet/hiera.yaml
 
     #manifestdir = $confdir/$environment
+    <% if @osversion == '22' %>
+    basemodulepath = $confdir/modules:/usr/share/puppet/modules
+    <% else %>
     modulepath = /usr/share/puppet/modules:/etc/puppet/modules
+    <% end %>
     #storeconfigs = true
     #storeconfigs_backend = puppetdb
     #max_deprecations = 0
@@ -48,7 +56,9 @@
     # We need this path here as well. Otherwise the modules from 
     # puppetforge are not found. For example the concat module is needed
     # by the http module.
+    <% if @osversion != '22' %>
     modulepath = /usr/share/puppet/modules
+    <% end %>
     environment = <%= @hiera_environment %>
 
     max_deprecations = 0

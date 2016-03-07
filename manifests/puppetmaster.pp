@@ -32,13 +32,24 @@ class bootstrap_puppetmaster::puppetmaster (
     allow_from     => $allowed_hosts,
   }
 
-  package {'puppet':
-    ensure  => installed,
-  }
+  if ($::operatingsystemrelease == '22') {
+    package {'puppet':
+      ensure  => '3.8.1',
+    }
 
-  package {'puppet-server':
-    ensure  => installed,
-    require => File['puppetconf'],
+    package {'puppet-server':
+      ensure  => '3.8.1-1.fc20',
+      require => File['puppetconf'],
+    }
+  } else {
+    package {'puppet':
+      ensure  => installed,
+    }
+
+    package {'puppet-server':
+      ensure  => installed,
+      require => File['puppetconf'],
+    }
   }
 
   service {'puppetmaster':
@@ -48,6 +59,8 @@ class bootstrap_puppetmaster::puppetmaster (
     hasstatus  => true,
     require    => Package['puppet-server'],
   }
+
+  $osversion = $::operatingsystemrelease
 
   file { 'puppetconf':
     path    => '/etc/puppet/puppet.conf',
