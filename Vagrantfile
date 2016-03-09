@@ -2,14 +2,6 @@ Vagrant.configure(2) do |config|
   config.vm.box = "fedora22"
   $fixes = <<FIXES
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
-sed -i 's/#baseurl/baseurl/' /etc/yum.repos.d/fedora.repo
-sed -i 's/^metalink/#metalink/' /etc/yum.repos.d/fedora.repo
-sed -i 's/#baseurl/baseurl/' /etc/yum.repos.d/fedora-updates.repo
-sed -i 's/^metalink/#metalink/' /etc/yum.repos.d/fedora-updates.repo
-
-if [ -f /etc/yum.repos.d/fedora-updates-testing.repo ]; then
-  rm /etc/yum.repos.d/fedora-updates-testing.repo
-fi
 FIXES
 
   $prepare = <<PREPARE
