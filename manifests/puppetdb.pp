@@ -2,12 +2,19 @@
 # class bootstrap_puppetmaster::puppetdb
 #
 class bootstrap_puppetmaster::puppetdb {
-#  class { '::postgresql::globals':
-#    version => '9.4',
-#  }
+  if ($::operatingsystemrelease == 22) {
+    Service {
+      provider => 'systemd',
+    }
+  } else {
+    class { '::postgresql::globals':
+      version => '9.3',
+    }
+  }
 
   class { '::postgresql::server':
     ip_mask_allow_all_users => '0.0.0.0/0',
+    service_enable => false,
   }
 
   class { '::puppetdb':
