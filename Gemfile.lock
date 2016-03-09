@@ -15,7 +15,7 @@ GEM
       spdx-licenses (~> 1.0)
     mocha (1.1.0)
       metaclass (~> 0.0.1)
-    puppet (3.8.1)
+    puppet (3.8.4)
       facter (> 1.6, < 3)
       hiera (~> 1.0)
       json_pure
@@ -53,7 +53,7 @@ PLATFORMS
 DEPENDENCIES
   facter (>= 1.7.0)
   metadata-json-lint
-  puppet (= 3.8.1)
+  puppet (= 3.8.4)
   puppet-lint (>= 0.3.2)
   puppetlabs_spec_helper (>= 0.1.0)
   rake
