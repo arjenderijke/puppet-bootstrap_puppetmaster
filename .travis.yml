@@ -4,6 +4,8 @@ sudo: false
 notifications:
   email:
     - arjenderijke@gmail.com
+before_install:
+- gem update bundler
 env:
   - PUPPET_VERSION=3.7.1
   - PUPPET_VERSION=3.8.4
