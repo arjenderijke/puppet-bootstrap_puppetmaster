@@ -9,7 +9,7 @@ before_install:
 before_script:
 - rm -rf ~/build/arjenderijke/puppet-bootstrap_puppetmaster/vendor/bundle/ruby/2.2.0/gems/puppet-${PUPPET_VERSION}/lib/puppet/vendor/*
 - echo "require 'safe_yaml'" > ~/build/arjenderijke/puppet-bootstrap_puppetmaster/vendor/bundle/ruby/2.2.0/gems/puppet-${PUPPET_VERSION}/lib/puppet/vendor/require_vendored.rb
-- gem install safe_yaml
+- gem install --vendor safe_yaml
 env:
   - PUPPET_VERSION=3.7.5
   - PUPPET_VERSION=3.8.1
