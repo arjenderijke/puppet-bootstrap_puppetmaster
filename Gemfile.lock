@@ -44,6 +44,7 @@ GEM
     rspec-puppet (2.3.2)
       rspec
     rspec-support (3.4.1)
+    safe_yaml (1.0.4)
     spdx-licenses (1.0.0)
       json
 
@@ -58,3 +59,4 @@ DEPENDENCIES
   puppetlabs_spec_helper (>= 0.1.0)
   rake
   rspec-puppet
+  safe_yaml
