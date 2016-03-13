@@ -2,3 +2,5 @@
 pkg
 *~
 doc
+.bundle
+vendor
