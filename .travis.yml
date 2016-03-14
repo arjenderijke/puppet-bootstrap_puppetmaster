@@ -5,6 +5,7 @@ notifications:
   email:
     - arjenderijke@gmail.com
 before_install:
+- rm Gemfile.lock || true
 - gem update bundler
 before_script:
 - rm -rf ~/build/arjenderijke/puppet-bootstrap_puppetmaster/vendor/bundle/ruby/2.2.0/gems/puppet-${PUPPET_VERSION}/lib/puppet/vendor/*
