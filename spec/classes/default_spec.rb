@@ -11,6 +11,10 @@ describe 'bootstrap_puppetmaster' do
       }
     end
 
-    it { should contain_class('bootstrap_puppetmaster') }
+    it 'should contain class bootstrap_puppetmaster' do
+      expect {
+        should contain_class('bootstrap_puppetmaster')
+      }
+    end
   end
 end
