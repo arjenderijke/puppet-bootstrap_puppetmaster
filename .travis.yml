@@ -14,6 +14,4 @@ gemfile:
 - gemfiles/gemfile_puppet-3.8.1
 env:
   - PUPPET_VERSION=3.7.5
-    gemfile: gemfiles/gemfile_puppet-3.7.5
   - PUPPET_VERSION=3.8.1
-    gemfile: gemfiles/gemfile_puppet-3.8.1
