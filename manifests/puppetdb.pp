@@ -14,7 +14,7 @@ class bootstrap_puppetmaster::puppetdb {
 
   class { '::postgresql::server':
     ip_mask_allow_all_users => '0.0.0.0/0',
-    service_enable => false,
+    service_enable          => false,
   }
 
   class { '::puppetdb':
