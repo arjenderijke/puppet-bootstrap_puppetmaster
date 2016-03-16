@@ -131,7 +131,7 @@ end
 
 desc "Workarounds for puppetdb"
 task :workaround do
-  sh "/usr/bin/wget http://yum.puppetlabs.com/fedora/f20/products/x86_64/puppetdb-2.3.5-1.fc20.noarch.rpm -O /tmp/puppetdb-2.3.5-1.fc20.noarch.rpm"
+  sh "/usr/bin/wget --quiet http://yum.puppetlabs.com/fedora/f20/products/x86_64/puppetdb-2.3.5-1.fc20.noarch.rpm -O /tmp/puppetdb-2.3.5-1.fc20.noarch.rpm"
   sh "/usr/bin/rpm -i --nodeps /tmp/puppetdb-2.3.5-1.fc20.noarch.rpm"
   sh "/usr/bin/cp #{Dir.pwd}/files/puppetdb.service /usr/lib/systemd/system/puppetdb.service"
 end
