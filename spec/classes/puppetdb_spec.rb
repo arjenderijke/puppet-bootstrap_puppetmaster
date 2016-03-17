@@ -1,5 +1,5 @@
 require 'spec_helper'
-describe 'bootstrap_puppetmaster' do
+describe 'bootstrap_puppetmaster::puppetdb' do
 
   context 'with defaults for all parameters on Fedora 21' do
 
@@ -11,9 +11,9 @@ describe 'bootstrap_puppetmaster' do
       }
     end
 
-    it 'should contain class bootstrap_puppetmaster' do
+    it 'should contain class bootstrap_puppetmaster::puppetdb' do
       expect {
-        should contain_class('bootstrap_puppetmaster')
+        should contain_class('bootstrap_puppetmaster::puppetdb')
       }
     end
   end
@@ -28,9 +28,9 @@ describe 'bootstrap_puppetmaster' do
       }
     end
 
-    it 'should contain class bootstrap_puppetmaster' do
+    it 'should contain class bootstrap_puppetmaster::puppetdb' do
       expect {
-        should contain_class('bootstrap_puppetmaster')
+        should contain_class('bootstrap_puppetmaster::puppetdb')
       }
     end
   end
