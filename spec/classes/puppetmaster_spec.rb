@@ -53,9 +53,14 @@ describe 'bootstrap_puppetmaster::puppetmaster' do
     end
 
     it 'should contain class apache::mod::passenger' do
-      expect {
-        should contain_class('apache::mod::passenger')
-      }
+      is_expected.to contain_class('apache::mod::passenger')
+    end
+
+    it 'should contain class apache::mod::proxy' do
+      is_expected.to contain_class('apache::mod::proxy').with(
+                 'proxy_requests' => 'On',
+                 'allow_from'     => ['127.0.0.1', '192.168.121.0/24']
+               )
     end
   end
 end
