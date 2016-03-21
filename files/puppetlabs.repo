@@ -1,0 +1,6 @@
+[puppetlabs-products]
+name=Puppet Labs Products Fedora 22 - x86_64
+baseurl=http://yum.puppetlabs.com/fedora/f20/products/x86_64/
+enabled=1
+gpgcheck=0
+priority=99

@@ -7,7 +7,7 @@ FIXES
   $prepare = <<PREPARE
 sed -i 's/localhost/localdomain/' /etc/resolv.conf
 auditctl -e0
-cp /tmp/puppetlabs.repo /etc/yum.repos.d/
+cp /vagrant/files/puppetlabs.repo /etc/yum.repos.d/
 dnf -y install rake puppet-3.8.1 wget
 rm -rf /usr/share/ruby/vendor_ruby/puppet/vendor/safe_yaml
 rm -rf /usr/share/ruby/vendor_ruby/puppet/vendor/safe_yaml_patches.rb
@@ -17,7 +17,6 @@ cd /vagrant
 rake puppetmaster HOSTNAME=localhost.localdomain
 PREPARE
 
-  config.vm.provision "file", source: "files/puppetlabs.repo", destination: "/tmp/puppetlabs.repo"
   config.vm.provision "shell", inline: $fixes
   config.vm.provision :reload
   config.vm.provision "shell", inline: $prepare

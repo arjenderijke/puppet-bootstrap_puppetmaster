@@ -25,9 +25,9 @@ task :upgrade => [:pre, :modules, :force, :build_pkg, :install_pkg, :step1, :ste
 
 desc "Validate prerequisits"
 task :pre do
+  sh "dnf -y install puppet-3.8.1 puppet-server-3.8.1"
   ['ruby',
    'rubygem-rake',
-   'puppet-3.8.1',
    'java-1.8.0-openjdk',
    'wget'
   ].each do |rpm_package|
