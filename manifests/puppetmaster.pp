@@ -33,6 +33,10 @@ class bootstrap_puppetmaster::puppetmaster (
   }
 
   if ($::operatingsystemrelease == '22') {
+    Service {
+      provider => 'systemd',
+    }
+
     package {'puppet':
       ensure  => '3.8.1-1.fc20',
     }
