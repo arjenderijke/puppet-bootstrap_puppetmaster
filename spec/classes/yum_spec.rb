@@ -12,9 +12,28 @@ describe 'bootstrap_puppetmaster::yum' do
     end
 
     it 'should contain class bootstrap_puppetmaster::yum' do
-      expect {
-        should contain_class('bootstrap_puppetmaster::yum')
-      }
+      is_expected.to contain_class('bootstrap_puppetmaster::yum')
+    end
+
+    it 'should contain yumrepo puppetlabs-products' do
+      is_expected.to contain_yumrepo('puppetlabs-products').with(
+          'enabled'  => '1',
+          'gpgcheck' => '0'
+        )
+    end
+
+    it 'should contain yumrepo puppetlabs-deps' do
+      is_expected.to contain_yumrepo('puppetlabs-deps').with(
+          'enabled'  => '1',
+          'gpgcheck' => '0'
+        )
+    end
+
+    it 'should contain yumrepo puppetlabs-devel' do
+      is_expected.to contain_yumrepo('puppetlabs-devel').with(
+          'enabled'  => '1',
+          'gpgcheck' => '0'
+        )
     end
   end
 
@@ -29,36 +48,28 @@ describe 'bootstrap_puppetmaster::yum' do
     end
 
     it 'should contain class bootstrap_puppetmaster::yum' do
-      expect {
-        should contain_class('bootstrap_puppetmaster::yum')
-      }
+      is_expected.to contain_class('bootstrap_puppetmaster::yum')
     end
 
     it 'should contain yumrepo puppetlabs-products' do
-      expect {
-        should contain_yumrepo('puppetlabs-products').with(
+      is_expected.to contain_yumrepo('puppetlabs-products').with(
           'enabled'  => '1',
           'gpgcheck' => '0'
         )
-      }
     end
 
     it 'should contain yumrepo puppetlabs-deps' do
-      expect {
-        should contain_yumrepo('puppetlabs-deps').with(
+      is_expected.to contain_yumrepo('puppetlabs-deps').with(
           'enabled'  => '1',
           'gpgcheck' => '0'
         )
-      }
     end
 
     it 'should contain yumrepo puppetlabs-devel' do
-      expect {
-        should contain_yumrepo('puppetlabs-devel').with(
+      is_expected.to contain_yumrepo('puppetlabs-devel').with(
           'enabled'  => '1',
           'gpgcheck' => '0'
         )
-      }
     end
   end
 end
