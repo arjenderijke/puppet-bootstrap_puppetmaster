@@ -59,6 +59,11 @@ task :modules do
   ].each do |puppet_module|
     sh "puppet module install -i /usr/share/puppet/modules #{puppet_module}"
   end
+  sh "/usr/bin/wget --quiet https://raw.githubusercontent.com/nibalizer/puppet-dnf/master/lib/puppet/provider/package/dnf.rb -O /usr/share/ruby/vendor_ruby/puppet/provider/package/dnf.rb"
+  sh "/usr/bin/wget --quiet https://forgeapi.puppetlabs.com/v3/files/puppetlabs-activemq-0.4.0.tar.gz -O /tmp/puppetlabs-activemq-0.4.0.tar.gz"
+  sh "/usr/bin/tar zxf /tmp/puppetlabs-activemq-0.4.0.tar.gz -C /tmp/"
+  sh " puppet module build /tmp/puppetlabs-activemq-0.4.0/"
+  sh "/usr/bin/puppet module install --ignore-dependencies --target-dir=/usr/share/puppet/modules/ --force /tmp/puppetlabs-activemq-0.4.0/pkg/puppetlabs-activemq-0.4.0.tar.gz"
 end
 
 desc "Force puppet run"
