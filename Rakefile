@@ -132,6 +132,7 @@ task :step3 do
   |ok, status|
     puts "ok #{ok} status #{status.exitstatus}\n"
   end
+  sh "systemctl enable postgresql.service"
 end
 
 desc "Workarounds for puppetdb"
