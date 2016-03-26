@@ -3,5 +3,8 @@ fixtures:
     stdlib: "git://github.com/puppetlabs/puppetlabs-stdlib.git"
     apache: "git://github.com/puppetlabs/puppetlabs-apache.git"
     concat: "git://github.com/puppetlabs/puppetlabs-concat.git"
+    postgresql: "git://github.com/puppetlabs/puppetlabs-postgresql.git"
+    puppetdb: "git://github.com/puppetlabs/puppetlabs-puppetdb.git"
+    inifile: "git://github.com/puppetlabs/puppetlabs-inifile.git"
   symlinks:
     bootstrap_puppetmaster: "#{source_dir}"

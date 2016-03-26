@@ -12,10 +12,13 @@ describe 'bootstrap_puppetmaster::puppetdb' do
     end
 
     it 'should contain class bootstrap_puppetmaster::puppetdb' do
-      expect {
-        should contain_class('bootstrap_puppetmaster::puppetdb')
-      }
+      is_expected.to contain_class('bootstrap_puppetmaster::puppetdb')
     end
+
+    it 'should contain class ::postgresql::server' do
+      is_expected.to contain_class('postgresql::server')
+    end
+
   end
 
   context 'with defaults for all parameters on Fedora 22' do
