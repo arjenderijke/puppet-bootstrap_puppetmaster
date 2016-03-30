@@ -148,4 +148,5 @@ task :puppetrun do
   |ok, status|
     puts "ok #{ok} status #{status.exitstatus}\n"
   end
+  sh "systemctl stop puppet.service"
 end

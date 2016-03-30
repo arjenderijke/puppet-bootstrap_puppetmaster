@@ -41,6 +41,14 @@ class bootstrap_puppetmaster::puppetmaster (
       ensure  => '3.8.1-1.fc20',
     }
 
+    service {'puppet':
+      ensure     => stopped,
+      enable     => false,
+      hasrestart => true,
+      hasstatus  => true,
+      require    => Package['puppet'],
+    }
+
     package {'puppet-server':
       ensure  => '3.8.1-1.fc20',
       require => File['puppetconf'],
