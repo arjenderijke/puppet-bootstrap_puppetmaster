@@ -12,6 +12,7 @@ task :upgrade => [:pre, :modules, :force, :build_pkg, :install_pkg, :step1, :ste
 
 desc "Validate prerequisits"
 task :pre do
+  sh "dnf -y -q update --exclude=puppet --exclude=puppet-server"
   sh "dnf -y install puppet-3.8.1 puppet-server-3.8.1"
   ['ruby',
    'rubygem-rake',
@@ -42,7 +43,8 @@ task :modules do
    'petems-swap_file',
    'puppetlabs-java_ks',
    'puppetlabs-activemq',
-   'thias-samba'
+   'thias-samba',
+   'garethr-docker'
   ].each do |puppet_module|
     sh "puppet module install -i /usr/share/puppet/modules #{puppet_module}"
   end
