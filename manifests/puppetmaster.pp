@@ -38,7 +38,7 @@ class bootstrap_puppetmaster::puppetmaster (
     }
 
     package {'puppet':
-      ensure  => '3.8.1-1.fc20',
+      ensure  => '3.8.7-1.el7',
     }
 
     service {'puppet':
@@ -50,7 +50,7 @@ class bootstrap_puppetmaster::puppetmaster (
     }
 
     package {'puppet-server':
-      ensure  => '3.8.1-1.fc20',
+      ensure  => '3.8.7-1.el7',
       require => File['puppetconf'],
     }
   } else {
