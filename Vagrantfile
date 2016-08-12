@@ -1,5 +1,5 @@
 Vagrant.configure(2) do |config|
-  config.vm.box = "fedora22"
+  config.vm.box = "centos/7"
   $fixes = <<FIXES
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
 FIXES
@@ -7,14 +7,7 @@ FIXES
   $prepare = <<PREPARE
 sed -i 's/localhost/localdomain/' /etc/resolv.conf
 auditctl -e0
-cp /vagrant/files/puppetlabs.repo /etc/yum.repos.d/
-dnf -y install rake puppet-3.8.7 puppet-server-3.8.7 wget
-rm -rf /usr/share/ruby/vendor_ruby/puppet/vendor/safe_yaml
-rm -rf /usr/share/ruby/vendor_ruby/puppet/vendor/safe_yaml_patches.rb
-echo "require 'safe_yaml'" > /usr/share/ruby/vendor_ruby/puppet/vendor/require_vendored.rb
-gem install puppetlabs_spec_helper safe_yaml
-cd /vagrant
-rake puppetmaster HOSTNAME=localhost.localdomain
+yum -y install wget
 PREPARE
 
   config.vm.provision "shell", inline: $fixes
