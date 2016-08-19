@@ -1,4 +1,4 @@
-node localhost {
+node 'localhost' {
   class { 'hiera':
     hierarchy => [
                   '%{environment}/%{calling_class}',
