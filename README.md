@@ -23,7 +23,7 @@
 
 ### What bootstrap_puppetmaster affects
 
-### Setup Requirements **OPTIONAL**
+### Setup Requirements
 
 ### Beginning with bootstrap_puppetmaster
 
@@ -35,4 +35,4 @@
 
 ## Development
 
-## Release Notes/Contributors/Etc **Optional**
+## Release Notes/Contributors/Etc
