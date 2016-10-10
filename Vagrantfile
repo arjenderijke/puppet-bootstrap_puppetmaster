@@ -1,5 +1,5 @@
 Vagrant.configure(2) do |config|
-  config.vm.box = "fedora22"
+  config.vm.box = "fedora24"
   $fixes = <<FIXES
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
 FIXES
