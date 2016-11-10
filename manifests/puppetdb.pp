@@ -2,7 +2,7 @@
 # class bootstrap_puppetmaster::puppetdb
 #
 class bootstrap_puppetmaster::puppetdb {
-  if ($::operatingsystemrelease == 22) {
+  if ($::operatingsystemrelease >= 22) {
     Service {
       provider => 'systemd',
     }
