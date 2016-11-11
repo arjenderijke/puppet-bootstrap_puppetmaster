@@ -8,7 +8,7 @@ FIXES
 sed -i 's/localhost/localdomain/' /etc/resolv.conf
 auditctl -e0
 cp /vagrant/files/puppetlabs.repo /etc/yum.repos.d/
-dnf -y install rake puppet-3.8.7 puppet-server-3.8.7 wget
+dnf -y --refresh install puppet-3.8.7 puppet-server-3.8.7 wget rubygems rubygem-rake
 rm -rf /usr/share/ruby/vendor_ruby/puppet/vendor/safe_yaml
 rm -rf /usr/share/ruby/vendor_ruby/puppet/vendor/safe_yaml_patches.rb
 echo "require 'safe_yaml'" > /usr/share/ruby/vendor_ruby/puppet/vendor/require_vendored.rb
