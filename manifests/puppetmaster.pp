@@ -58,6 +58,16 @@ class bootstrap_puppetmaster::puppetmaster (
       ensure  => installed,
     }
 
+    if ($::operatingsystemrelease == '24') {
+      service {'puppet':
+        ensure     => stopped,
+        enable     => false,
+        hasrestart => true,
+        hasstatus  => true,
+        require    => Package['puppet'],
+      }
+    }
+
     package {'puppet-server':
       ensure  => installed,
       require => File['puppetconf'],

@@ -17,6 +17,7 @@ mkdir /etc/pupppetlabs/puppet/keys
 /usr/bin/cp /vagrant/files/private_key.pkcs7.pem /etc/puppetlabs/puppet/keys/
 /usr/bin/cp /vagrant/files/public_key.pkcs7.pem /etc/puppetlabs/puppet/keys/
 /opt/puppetlabs/bin/puppet apply /vagrant/manifests/puppetserver.pp
+
 PREPARE
 
   config.vm.provision "shell", inline: $fixes
